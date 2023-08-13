@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  find-a-friend-api-db:
+    image: postgres 
+    container_name: find-a-friend-api
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: faf
+    ports:
+      - 5432:5432

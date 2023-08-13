@@ -10,65 +10,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
-  SUBSCRIBER
-  ORGANIZATION
-  ADMIN
-}
-
-model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
-  password String
-  role     UserRole @default(SUBSCRIBER)
-
-  organization Organization?
-
-  @@index([email])
-  @@map("users")
-}
-
-enum PetSize {
-  SMALL
-  MEDIUM
-  LARGE
-}
-
-enum Gender {
-  MALE
-  FEMALE
-}
-
 model Pet {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String?
-  color       String
-  species     String
-  gender      Gender
-  age         Int
-  size        PetSize
-  adopted_at  DateTime?
+  id               Int       @id @default(autoincrement())
+  name             String
+  description      String?
+  age              Int
+  size             Int
+  energy_level     Int
+  dependency_level Int
+  environment      String
+  adopted_at       DateTime?
+  created_at       DateTime  @default(now())
 
   organization    Organization? @relation(fields: [organization_id], references: [id])
   organization_id Int
 
+  pictures   PetPictures[]
+  requisites PetRequisites[]
+
   @@map("pets")
 }
 
+model PetPictures {
+  id  Int    @id @default(autoincrement())
+  url String
+
+  pet    Pet @relation(fields: [pet_id], references: [id])
+  pet_id Int
+
+  @@map("pet_pictures")
+}
+
+model PetRequisites {
+  id    Int    @id @default(autoincrement())
+  title String
+
+  pet    Pet @relation(fields: [pet_id], references: [id])
+  pet_id Int
+
+  @@map("pet_requisites")
+}
+
 model Organization {
-  id          Int     @id @default(autoincrement())
-  name        String
-  description String?
-  city        String
-  state       String
-  country     String
-  address     String
-  phone       String
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  password   String
+  name       String
+  owner_name String
+  zip_code   String
+  address    String
+  whatsapp   String
+  phone      String
+  created_at DateTime @default(now())
 
-  user_id Int   @unique
-  user    User  @relation(fields: [user_id], references: [id])
-  pets    Pet[]
+  pets Pet[]
 
+  @@index([email])
   @@map("organizations")
 }

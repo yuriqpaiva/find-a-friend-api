@@ -1,5 +1,5 @@
 import { type Organization } from '@prisma/client'
-import { type OrganizationRepository } from '../../../repositories/organization-repository'
+import { type OrganizationsRepository } from '../../../repositories/organizations-repository'
 
 interface CreateOrganizationRequest {
   email: string
@@ -14,11 +14,11 @@ interface CreateOrganizationRequest {
 
 export class CreateOrganizationUseCase {
   constructor(
-    private readonly organizationRepository: OrganizationRepository
+    private readonly organizationsRepository: OrganizationsRepository
   ) {}
 
   async execute(data: CreateOrganizationRequest): Promise<Organization> {
-    const organization = await this.organizationRepository.create(data)
+    const organization = await this.organizationsRepository.create(data)
     return organization
   }
 }

@@ -1,8 +1,19 @@
 import { type Prisma, type Organization } from '@prisma/client'
-import { type OrganizationRepository } from '../organization-repository'
+import { type OrganizationsRepository } from '../organizations-repository'
 
-export class InMemoryOrganizationRepository implements OrganizationRepository {
+export class InMemoryOrganizationsRepository
+  implements OrganizationsRepository
+{
   private readonly organizations: Organization[] = []
+
+  async findById(organizationId: number): Promise<Organization | null> {
+    const organization =
+      this.organizations.find(
+        (organization) => organization.id === organizationId
+      ) ?? null
+
+    return organization
+  }
 
   async create(
     organization: Prisma.OrganizationCreateInput

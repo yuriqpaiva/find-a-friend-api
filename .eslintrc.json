@@ -18,6 +18,8 @@
       "@typescript-eslint/strict-boolean-expressions": "off",
       "@typescript-eslint/no-base-to-string": "off",
       "@typescript-eslint/consistent-type-assertions": "off",
-      "@typescript-eslint/space-before-function-paren": "off"
+      "@typescript-eslint/space-before-function-paren": "off",
+      "@typescript-eslint/brace-style": "off",
+      "@typescript-eslint/indent": "off"
   }
 }

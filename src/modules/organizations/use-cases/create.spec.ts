@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemoryOrganizationRepository } from '../../../repositories/in-memory/in-memory-organization-repository'
+import { InMemoryOrganizationsRepository } from '../../../repositories/in-memory/in-memory-organizations-repository'
 import { CreateOrganizationUseCase } from './create'
-import { type OrganizationRepository } from '../../../repositories/organization-repository'
+import { type OrganizationsRepository } from '../../../repositories/organizations-repository'
 
-let organizationRepository: OrganizationRepository
+let organizationRepository: OrganizationsRepository
 let createOrganizationUseCase: CreateOrganizationUseCase
 
 describe('Create Organization Use Case', () => {
   beforeEach(() => {
-    organizationRepository = new InMemoryOrganizationRepository()
+    organizationRepository = new InMemoryOrganizationsRepository()
     createOrganizationUseCase = new CreateOrganizationUseCase(
       organizationRepository
     )

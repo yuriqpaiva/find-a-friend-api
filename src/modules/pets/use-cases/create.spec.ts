@@ -1,19 +1,17 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { type PetsRepository } from '../../../repositories/pets-repository'
 import { CreatePetUseCase } from './create'
 import { InMemoryPetsRepository } from '../../../repositories/in-memory/in-memory-pets-repository'
-import { type OrganizationsRepository } from '../../../repositories/organizations-repository'
 import { InMemoryOrganizationsRepository } from '../../../repositories/in-memory/in-memory-organizations-repository'
 import { ResourceNotFoundError } from '../../errors/resource-not-found-error'
 
-let organizationsRepository: OrganizationsRepository
-let petsRepository: PetsRepository
+let organizationsRepository: InMemoryOrganizationsRepository
+let petsRepository: InMemoryPetsRepository
 let createPetUseCase: CreatePetUseCase
 
 describe('Create Organization Use Case', () => {
   beforeEach(() => {
     organizationsRepository = new InMemoryOrganizationsRepository()
-    petsRepository = new InMemoryPetsRepository()
+    petsRepository = new InMemoryPetsRepository(organizationsRepository)
     createPetUseCase = new CreatePetUseCase(
       organizationsRepository,
       petsRepository
@@ -29,7 +27,8 @@ describe('Create Organization Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      phone: '00000000000'
+      phone: '00000000000',
+      city: 'Organization City'
     })
 
     const createdPet = await createPetUseCase.execute({

@@ -10,6 +10,7 @@ interface CreateOrganizationRequest {
   address: string
   whatsapp: string
   phone: string
+  city: string
 }
 
 export class CreateOrganizationUseCase {

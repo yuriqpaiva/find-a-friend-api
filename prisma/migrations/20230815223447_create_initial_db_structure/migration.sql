@@ -41,6 +41,7 @@ CREATE TABLE "organizations" (
     "name" TEXT NOT NULL,
     "owner_name" TEXT NOT NULL,
     "zip_code" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "whatsapp" TEXT NOT NULL,
     "phone" TEXT NOT NULL,

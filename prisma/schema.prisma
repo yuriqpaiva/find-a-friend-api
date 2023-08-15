@@ -58,6 +58,7 @@ model Organization {
   name       String
   owner_name String
   zip_code   String
+  city       String
   address    String
   whatsapp   String
   phone      String

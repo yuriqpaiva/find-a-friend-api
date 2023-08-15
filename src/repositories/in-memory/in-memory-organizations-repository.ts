@@ -4,7 +4,7 @@ import { type OrganizationsRepository } from '../organizations-repository'
 export class InMemoryOrganizationsRepository
   implements OrganizationsRepository
 {
-  private readonly organizations: Organization[] = []
+  public readonly organizations: Organization[] = []
 
   async findById(organizationId: number): Promise<Organization | null> {
     const organization =

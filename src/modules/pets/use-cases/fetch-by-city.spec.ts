@@ -56,7 +56,7 @@ describe('Fetch Pets by City Use Case', () => {
     expect(pets).toEqual([firstPet, secondPet])
   })
 
-  it('should be able to return an empty array if no pets are found', async () => {
+  it('should be able to get an empty return if city does not match', async () => {
     const organization = await organizationsRepository.create({
       email: 'org@example.com.br',
       password: '123456',
@@ -82,6 +82,80 @@ describe('Fetch Pets by City Use Case', () => {
 
     const pets = await fetchPetsByCityUseCase.execute({
       city: 'Rio de Janeiro'
+    })
+
+    expect(pets).toEqual([])
+  })
+
+  it('should be able to fetch pets using query', async () => {
+    const organization = await organizationsRepository.create({
+      email: 'org@example.com.br',
+      password: '123456',
+      name: 'Organization Name',
+      owner_name: 'Organization Owner Name',
+      zip_code: '00000-000',
+      address: 'Organization Address',
+      whatsapp: '00000000000',
+      phone: '00000000000',
+      city: 'São Paulo'
+    })
+
+    const createdPet = await petsRepository.create({
+      name: 'Pet example',
+      description: 'Pet description',
+      age: 1,
+      size: 3,
+      energy_level: 3,
+      dependency_level: 2,
+      environment: 'Ambiente amplo',
+      organization_id: organization.id
+    })
+
+    const pets = await fetchPetsByCityUseCase.execute({
+      city: 'São Paulo',
+      query: {
+        age: 1,
+        size: 3,
+        energy_level: 3,
+        dependency_level: 2
+      }
+    })
+
+    expect(pets).toEqual([createdPet])
+  })
+
+  it('should be able to return empty pets if query does not match', async () => {
+    const organization = await organizationsRepository.create({
+      email: 'org@example.com.br',
+      password: '123456',
+      name: 'Organization Name',
+      owner_name: 'Organization Owner Name',
+      zip_code: '00000-000',
+      address: 'Organization Address',
+      whatsapp: '00000000000',
+      phone: '00000000000',
+      city: 'São Paulo'
+    })
+
+    await petsRepository.create({
+      name: 'Pet example',
+      description: 'Pet description',
+      age: 1,
+      size: 3,
+      energy_level: 2,
+      dependency_level: 2,
+      environment: 'Ambiente amplo',
+      organization_id: organization.id
+    })
+
+    const pets = await fetchPetsByCityUseCase.execute({
+      city: 'São Paulo',
+      query: {
+        age: 2,
+        size: 1,
+        energy_level: 1,
+        dependency_level: 1
+      }
     })
 
     expect(pets).toEqual([])

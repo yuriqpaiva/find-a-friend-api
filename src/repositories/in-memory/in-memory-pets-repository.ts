@@ -1,5 +1,8 @@
 import { type Pet, type Prisma } from '@prisma/client'
-import { type PetsRepository } from '../pets-repository'
+import {
+  type FindManyByCityQuery,
+  type PetsRepository
+} from '../pets-repository'
 import { type InMemoryOrganizationsRepository } from './in-memory-organizations-repository'
 
 export class InMemoryPetsRepository implements PetsRepository {
@@ -9,16 +12,38 @@ export class InMemoryPetsRepository implements PetsRepository {
 
   private readonly pets: Pet[] = []
 
-  async findManyByCity(city: string): Promise<Pet[]> {
+  async findManyByCity(
+    city: string,
+    query?: FindManyByCityQuery
+  ): Promise<Pet[]> {
     const organizations = this.organizationsRepository.organizations.filter(
       (organization) => organization.city === city
     )
 
-    return this.pets.filter((pet) => {
-      return organizations.some(
-        (organization) => organization.id === pet.organization_id
-      )
-    })
+    const pets = this.pets
+      .filter((pet) => {
+        return organizations.some(
+          (organization) => organization.id === pet.organization_id
+        )
+      })
+      .filter((pet) => {
+        const ageCondition = !query?.age || pet.age === query.age
+        const energyLevelCondition =
+          !query?.energy_level || pet.energy_level === query.energy_level
+        const sizeCondition = !query?.size || pet.size === query.size
+        const dependencyLevelCondition =
+          !query?.dependency_level ||
+          pet.dependency_level === query.dependency_level
+
+        return (
+          ageCondition &&
+          energyLevelCondition &&
+          sizeCondition &&
+          dependencyLevelCondition
+        )
+      })
+
+    return pets
   }
 
   async create(data: Prisma.PetUncheckedCreateInput): Promise<Pet> {

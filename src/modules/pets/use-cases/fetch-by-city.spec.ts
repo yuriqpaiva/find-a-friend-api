@@ -23,7 +23,6 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      phone: '00000000000',
       city: 'São Paulo'
     })
 
@@ -65,7 +64,6 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      phone: '00000000000',
       city: 'São Paulo'
     })
 
@@ -96,7 +94,6 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      phone: '00000000000',
       city: 'São Paulo'
     })
 
@@ -133,7 +130,6 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      phone: '00000000000',
       city: 'São Paulo'
     })
 

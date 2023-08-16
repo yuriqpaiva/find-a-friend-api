@@ -24,7 +24,6 @@ describe('Get Pet Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      phone: '00000000000',
       city: 'São Paulo'
     })
 

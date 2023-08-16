@@ -10,7 +10,6 @@ interface CreateOrganizationUseCaseRequest {
   zip_code: string
   address: string
   whatsapp: string
-  phone: string
   city: string
 }
 

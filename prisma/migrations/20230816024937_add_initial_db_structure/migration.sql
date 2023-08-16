@@ -44,7 +44,6 @@ CREATE TABLE "organizations" (
     "city" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "whatsapp" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "organizations_pkey" PRIMARY KEY ("id")

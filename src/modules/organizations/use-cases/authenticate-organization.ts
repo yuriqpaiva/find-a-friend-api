@@ -27,7 +27,6 @@ export class AuthenticateOrganizationUseCase {
       throw new InvalidCredentialsError()
     }
 
-    // Compare the password provided with the password stored in the database
     const passwordMatched = await compare(password, organization.password)
 
     if (!passwordMatched) {

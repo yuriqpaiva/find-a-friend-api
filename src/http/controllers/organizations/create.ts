@@ -5,7 +5,7 @@ import { z } from 'zod'
 export async function create(
   request: FastifyRequest,
   reply: FastifyReply
-): Promise<any> {
+): Promise<void> {
   const createOrganizationSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6).max(20),

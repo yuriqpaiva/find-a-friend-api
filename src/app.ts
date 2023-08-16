@@ -1,8 +1,14 @@
 import fastify from 'fastify'
 import { organizationsRoutes } from './http/controllers/organizations/routes'
 import { ZodError } from 'zod'
+import fastifyJwt from '@fastify/jwt'
+import env from './env'
 
 export const app = fastify()
+
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET
+})
 
 app.register(organizationsRoutes)
 
@@ -13,6 +19,8 @@ app.setErrorHandler((error, _, reply) => {
       details: error.format()
     })
   }
+
+  console.error(error)
 
   return reply.status(500).send({
     message: 'Internal server error'

@@ -12,6 +12,10 @@ export class InMemoryPetsRepository implements PetsRepository {
 
   private readonly pets: Pet[] = []
 
+  async findById(id: number): Promise<Pet | null> {
+    return this.pets.find((pet) => pet.id === id) ?? null
+  }
+
   async findManyByCity(
     city: string,
     query?: FindManyByCityQuery

@@ -9,5 +9,6 @@ export interface FindManyByCityQuery {
 
 export interface PetsRepository {
   findManyByCity: (city: string, query?: FindManyByCityQuery) => Promise<Pet[]>
+  findById: (id: number) => Promise<Pet | null>
   create: (data: Prisma.PetUncheckedCreateInput) => Promise<Pet>
 }

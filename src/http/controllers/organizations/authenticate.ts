@@ -33,5 +33,7 @@ export async function authenticate(
         message: error.message
       })
     }
+
+    throw error
   }
 }

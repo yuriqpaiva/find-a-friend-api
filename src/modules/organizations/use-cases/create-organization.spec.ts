@@ -15,7 +15,7 @@ describe('Create Organization Use Case', () => {
   })
 
   it('should be able to create a new organization', async () => {
-    const createdOrganization = await createOrganizationUseCase.execute({
+    const { organization } = await createOrganizationUseCase.execute({
       email: 'org@example.com.br',
       password: '123456',
       name: 'Organization Name',
@@ -26,7 +26,7 @@ describe('Create Organization Use Case', () => {
       city: 'Organization City'
     })
 
-    expect(createdOrganization).toEqual(
+    expect(organization).toEqual(
       expect.objectContaining({
         id: expect.any(Number)
       })

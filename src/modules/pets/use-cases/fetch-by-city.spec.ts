@@ -23,7 +23,7 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      city: 'São Paulo'
+      city: 'Acre'
     })
 
     const firstPet = await petsRepository.create({
@@ -48,8 +48,8 @@ describe('Fetch Pets by City Use Case', () => {
       organization_id: organization.id
     })
 
-    const pets = await fetchPetsByCityUseCase.execute({
-      city: 'São Paulo'
+    const { pets } = await fetchPetsByCityUseCase.execute({
+      cityId: 1
     })
 
     expect(pets).toEqual([firstPet, secondPet])
@@ -64,7 +64,7 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      city: 'São Paulo'
+      city: 'Acre'
     })
 
     await petsRepository.create({
@@ -78,8 +78,10 @@ describe('Fetch Pets by City Use Case', () => {
       organization_id: organization.id
     })
 
-    const pets = await fetchPetsByCityUseCase.execute({
-      city: 'Rio de Janeiro'
+    const notMatchId = 2
+
+    const { pets } = await fetchPetsByCityUseCase.execute({
+      cityId: notMatchId
     })
 
     expect(pets).toEqual([])
@@ -94,7 +96,7 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      city: 'São Paulo'
+      city: 'Acre'
     })
 
     const createdPet = await petsRepository.create({
@@ -108,8 +110,8 @@ describe('Fetch Pets by City Use Case', () => {
       organization_id: organization.id
     })
 
-    const pets = await fetchPetsByCityUseCase.execute({
-      city: 'São Paulo',
+    const { pets } = await fetchPetsByCityUseCase.execute({
+      cityId: 1,
       query: {
         age: 1,
         size: 3,
@@ -130,7 +132,7 @@ describe('Fetch Pets by City Use Case', () => {
       zip_code: '00000-000',
       address: 'Organization Address',
       whatsapp: '00000000000',
-      city: 'São Paulo'
+      city: 'Acre'
     })
 
     await petsRepository.create({
@@ -144,8 +146,8 @@ describe('Fetch Pets by City Use Case', () => {
       organization_id: organization.id
     })
 
-    const pets = await fetchPetsByCityUseCase.execute({
-      city: 'São Paulo',
+    const { pets } = await fetchPetsByCityUseCase.execute({
+      cityId: 1,
       query: {
         age: 2,
         size: 1,

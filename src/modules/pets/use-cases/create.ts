@@ -14,13 +14,19 @@ interface CreatePetUseCaseRequest {
   organization_id: number
 }
 
+interface CreatePetUseCaseResponse {
+  pet: Pet
+}
+
 export class CreatePetUseCase {
   constructor(
     private readonly organizationsRepository: OrganizationsRepository,
     private readonly petsRepository: PetsRepository
   ) {}
 
-  async execute(data: CreatePetUseCaseRequest): Promise<Pet> {
+  async execute(
+    data: CreatePetUseCaseRequest
+  ): Promise<CreatePetUseCaseResponse> {
     const organization = await this.organizationsRepository.findById(
       data.organization_id
     )
@@ -30,6 +36,7 @@ export class CreatePetUseCase {
     }
 
     const pet = await this.petsRepository.create(data)
-    return pet
+
+    return { pet }
   }
 }

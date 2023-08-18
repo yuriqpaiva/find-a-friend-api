@@ -24,7 +24,7 @@ export async function search(
 
     const fetchPetsByCityUseCase = makeFetchPetsByCityUseCase()
 
-    const pets = await fetchPetsByCityUseCase.execute({ cityId, query })
+    const { pets } = await fetchPetsByCityUseCase.execute({ cityId, query })
 
     return reply.send({ pets })
   } catch (error) {

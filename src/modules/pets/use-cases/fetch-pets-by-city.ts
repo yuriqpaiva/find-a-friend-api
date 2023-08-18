@@ -13,10 +13,16 @@ interface FetchPetsByCityUseCaseRequest {
   }
 }
 
+interface FetchPetsByCityUseCaseResponse {
+  pets: Pet[]
+}
+
 export class FetchPetsByCityUseCase {
   constructor(private readonly petsRepository: PetsRepository) {}
 
-  async execute(data: FetchPetsByCityUseCaseRequest): Promise<Pet[]> {
+  async execute(
+    data: FetchPetsByCityUseCaseRequest
+  ): Promise<FetchPetsByCityUseCaseResponse> {
     const cityName = brazilStates.find((state) => state.id === data.cityId)
       ?.name
 
@@ -26,6 +32,6 @@ export class FetchPetsByCityUseCase {
 
     const pets = await this.petsRepository.findManyByCity(cityName, data.query)
 
-    return pets
+    return { pets }
   }
 }

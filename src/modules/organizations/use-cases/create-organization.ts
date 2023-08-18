@@ -13,18 +13,24 @@ interface CreateOrganizationUseCaseRequest {
   city: string
 }
 
+interface CreateOrganizationUseCaseResponse {
+  organization: Organization
+}
+
 export class CreateOrganizationUseCase {
   constructor(
     private readonly organizationsRepository: OrganizationsRepository
   ) {}
 
-  async execute(data: CreateOrganizationUseCaseRequest): Promise<Organization> {
+  async execute(
+    data: CreateOrganizationUseCaseRequest
+  ): Promise<CreateOrganizationUseCaseResponse> {
     const password_hash = await hash(data.password, 6)
 
     const organization = await this.organizationsRepository.create({
       ...data,
       password: password_hash
     })
-    return organization
+    return { organization }
   }
 }

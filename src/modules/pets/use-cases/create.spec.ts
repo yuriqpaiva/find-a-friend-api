@@ -30,7 +30,7 @@ describe('Create Organization Use Case', () => {
       city: 'Organization City'
     })
 
-    const createdPet = await createPetUseCase.execute({
+    const { pet } = await createPetUseCase.execute({
       name: 'Pet example',
       description: 'Pet description',
       age: 1,
@@ -41,7 +41,7 @@ describe('Create Organization Use Case', () => {
       organization_id: organization.id
     })
 
-    expect(createdPet).toEqual(
+    expect(pet).toEqual(
       expect.objectContaining({
         id: expect.any(Number)
       })

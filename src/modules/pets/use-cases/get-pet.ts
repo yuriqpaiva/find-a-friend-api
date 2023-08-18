@@ -6,16 +6,20 @@ interface GetPetUseCaseRequest {
   id: number
 }
 
+interface GetPetUseCaseResponse {
+  pet: Pet
+}
+
 export class GetPetUseCase {
   constructor(private readonly petsRepository: PetsRepository) {}
 
-  async execute({ id }: GetPetUseCaseRequest): Promise<Pet> {
+  async execute({ id }: GetPetUseCaseRequest): Promise<GetPetUseCaseResponse> {
     const pet = await this.petsRepository.findById(id)
 
     if (!pet) {
       throw new ResourceNotFoundError()
     }
 
-    return pet
+    return { pet }
   }
 }

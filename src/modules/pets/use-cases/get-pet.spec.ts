@@ -38,7 +38,7 @@ describe('Get Pet Use Case', () => {
       organization_id: organization.id
     })
 
-    const pet = await getPetUseCase.execute({
+    const { pet } = await getPetUseCase.execute({
       id: createdPet.id
     })
 

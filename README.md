@@ -13,7 +13,7 @@ An API project to help people find their new best friend
 5. Authenticate as an organization
 
 ## 🔧 Getting started
-Create a .env file with the variables as in .env.example
+Create a `.env` file with the variables as in `.env.example`
 
 Install dependencies
 ```bash
@@ -31,7 +31,7 @@ npm run start:dev
 ```
 
 ## 🧪 Testing
-Run tests using Vitest
+Run tests using [Vitest](https://vitest.dev/)
 
 Unity tests
 ```bash
